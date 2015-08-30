@@ -1,0 +1,3 @@
+from control import *
+
+emergency()
