@@ -56,7 +56,7 @@ int light()
 
 void motion_shake()
 {
-    int n_port = 3;
+    int n_port = 25;
     int start = 1;
   
 //    for(int i = start; i < start+n_serial; ++i)
