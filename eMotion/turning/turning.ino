@@ -58,14 +58,14 @@ void motion_shake()
 {
 
 
-  group_control(0, ids, 600, 32, 25);
+  group_control(0, ids, 1200, 32, 25);
   delay(1000);
-  group_control(1, ids, 600, 32, 25);
+  group_control(1, ids, 1200, 32, 25);
   delay(1000);
 
-  group_control(0, ids, 1900, 32, 25);
+  group_control(0, ids, 1800, 32, 25);
   delay(1000);
-  group_control(1, ids, 1900, 32, 25);
+  group_control(1, ids, 1800, 32, 25);
   delay(1000);
 }
 
