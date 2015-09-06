@@ -18,16 +18,19 @@ void group_control(int nSerial, int ids[], int angle, int num, int sp){
     case 0:
     {
       Serial1.println(command);
+      Serial1.flush();
       break;  
     }
     case 1:
     {
       Serial2.println(command);
+      Serial2.flush();
       break;  
     }
     case 2:
     {
       Serial3.println(command);
+      Serial3.flush();
       break;  
     }  
   }
@@ -54,6 +57,8 @@ int light()
 
 // Motion Definition
 
+int ids[32] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+
 void motion_shake()
 {
     int n_port = 3;
@@ -75,32 +80,14 @@ void motion_shake()
 //        delay(1000);
 //    }
 
-      for(int i = start; i < start+n_port; ++i)
-      {
-        int ids[1] = {i};
-        group_control(0, ids, 600, 1, 25);
-      }
+      group_control(0, ids, 600, 32, 25);
       delay(1000);
-      for(int i = start; i < start+n_port; ++i)
-      {
-        int ids[1] = {i};
-        group_control(1, ids, 600, 1, 25);
-//        delay(light());
-      }
+      group_control(1, ids, 600, 32, 25);
       delay(1000);
 
-      for(int i = start; i < start+n_port; ++i)
-      {
-        int ids[1] = {i};
-        group_control(0, ids, 1800, 1, 25);
-      }
+      group_control(0, ids, 1900, 32, 25);
       delay(1000);
-      for(int i = start; i < start+n_port; ++i)
-      {
-        int ids[1] = {i};
-        group_control(1, ids, 1800, 1, 25);
-//        delay(light());
-      }
+      group_control(1, ids, 1900, 32, 25);
       delay(1000);
 }
 

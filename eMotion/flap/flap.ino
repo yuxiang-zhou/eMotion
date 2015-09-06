@@ -18,16 +18,19 @@ void group_control(int nSerial, int ids[], int angle, int num, int sp){
     case 0:
     {
       Serial1.println(command);
+      Serial1.flush();
       break;  
     }
     case 1:
     {
       Serial2.println(command);
+      Serial2.flush();
       break;  
     }
     case 2:
     {
       Serial3.println(command);
+      Serial3.flush();
       break;  
     }  
   }
@@ -54,23 +57,23 @@ int light()
 
 // Motion Definition
 
+int ids[32] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+
 void motion_light()
 {
     int n_serial = 3;
     int start = 0;
-  
+
     for(int i = start; i < start+n_serial; ++i)
     {
-        int ids[3] = {1,2,3};
-        group_control(i, ids, 1500, 3, 25);
+        group_control(i, ids, 1500, 32, 25);
         delay(light());
 //        delay(1000);
     }
 
     for(int i = start; i < start+n_serial; ++i)
     {
-        int ids[3] = {1,2,3};
-        group_control(i, ids, 600, 3, 25);
+        group_control(i, ids, 600, 32, 25);
         delay(light());
 //        delay(1000);
     }
