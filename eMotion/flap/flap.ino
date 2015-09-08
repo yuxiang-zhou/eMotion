@@ -69,7 +69,7 @@ int irRead(int readPin, int triggerPin)
 int light()
 {
   int num = sonsor_reading(1);
-  Serial.print('Light: ');
+  Serial.print("Light: ");
   Serial.println(num);
   Serial.flush();
   return 100000 / num;
@@ -81,7 +81,7 @@ int irLED = 3;
 int IR()
 {
   int num = irRead(irSensorPin, irLED);
-  Serial.print('IR: ');
+  Serial.print("IR: ");
   Serial.println(num);
   Serial.flush();
   return num;
