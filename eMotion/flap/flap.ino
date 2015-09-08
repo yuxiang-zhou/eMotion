@@ -39,6 +39,7 @@ void group_control(int nSerial, int ids[], int angle, int num, int sp){
   Serial.print(nSerial);
   Serial.print(" ");
   Serial.println(command);
+  Serial.flush();
 }
 
 int sonsor_reading(int pin)
@@ -46,6 +47,21 @@ int sonsor_reading(int pin)
   int sensorPin = pin;
   int reading = analogRead(sensorPin);
   return reading;
+}
+
+int irRead(int readPin, int triggerPin)
+{
+  int halfPeriod = 13; //one period at 38.5khZ is aproximately 26 microseconds
+  int cycles = 38; //26 microseconds * 38 is more or less 1 millisecond
+  int i;
+  for (i=0; i <=cycles; i++)
+  {
+    digitalWrite(triggerPin, HIGH); 
+    delayMicroseconds(halfPeriod);
+    digitalWrite(triggerPin, LOW); 
+    delayMicroseconds(halfPeriod - 1);     // - 1 to make up for digitaWrite overhead    
+  }
+  return digitalRead(readPin);
 }
 
 // Helper Functions
@@ -56,9 +72,12 @@ int light()
   return 100000 / num;
 }
 
+int irSensorPin = 2;
+int irLED = 3;
+
 int IR()
 {
-  int num = sonsor_reading(2);
+  int num = irRead(irSensorPin, irLED);
   return num;
 }
 
@@ -74,7 +93,7 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay(light());       
+          delay(light() * rand() % 2000);       
     }
 
     for(int i = start; i < start+n_serial; ++i)
@@ -83,13 +102,16 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay(light());
+          delay(light() * rand() % 2000);
     }
             
 }
 
 void setup()
 {
+  pinMode(irSensorPin, INPUT);
+  pinMode(irLED, OUTPUT);
+
   Serial.begin(9600);
   Serial1.begin(9600);
   Serial2.begin(9600);
