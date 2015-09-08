@@ -1,4 +1,5 @@
 // Basic Commands
+int ids[32] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 
 void group_control(int nSerial, int ids[], int angle, int num, int sp){
   char command[512] = "";
@@ -55,10 +56,13 @@ int light()
   return 100000 / num;
 }
 
+int IR()
+{
+  int num = sonsor_reading(2);
+  return num;
+}
+
 // Motion Definition
-
-int ids[32] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
-
 void motion_light()
 {
     int n_serial = 3;
@@ -67,22 +71,25 @@ void motion_light()
     for(int i = start; i < start+n_serial; ++i)
     {
         group_control(i, ids, 1500, 32, 25);
-        delay(light());
-//        delay(1000);
+        if(IR())
+          delay(1000);
+        else
+          delay(light());       
     }
 
     for(int i = start; i < start+n_serial; ++i)
     {
         group_control(i, ids, 600, 32, 25);
-        delay(light());
-//        delay(1000);
+        if(IR())
+          delay(1000);
+        else
+          delay(light());
     }
             
 }
 
 void setup()
 {
-//  Serial.println('Started');
   Serial.begin(9600);
   Serial1.begin(9600);
   Serial2.begin(9600);
