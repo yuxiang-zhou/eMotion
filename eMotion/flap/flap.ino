@@ -72,7 +72,7 @@ int light()
   Serial.print("Light: ");
   Serial.println(num);
   Serial.flush();
-  return 100000 / num;
+  return num;
 }
 
 int irSensorPin = 2;
@@ -99,7 +99,7 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay((rand() / RAND_MAX) * light());       
+          delay(light() / 200.0 * 1500.0 + 500.0 + rand() / RAND_MAX * 250);       
     }
 
     for(int i = start; i < start+n_serial; ++i)
@@ -108,7 +108,7 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay((rand() / RAND_MAX) * light());
+          delay(light() / 200.0 * 1500.0 + 500.0 + rand() / RAND_MAX * 250);
     }
             
 }
