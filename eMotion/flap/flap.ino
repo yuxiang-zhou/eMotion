@@ -99,7 +99,7 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay(light() / 200.0 * 1500.0 + 500.0 + rand() / RAND_MAX * 250);       
+          delay(light() / 400.0 * 1000.0 + 500.0 + rand() / RAND_MAX * 250);       
     }
 
     for(int i = start; i < start+n_serial; ++i)
@@ -108,7 +108,7 @@ void motion_light()
         if(IR())
           delay(1000);
         else
-          delay(light() / 200.0 * 1500.0 + 500.0 + rand() / RAND_MAX * 250);
+          delay(light() / 400.0 * 1000.0 + 500.0 + rand() / RAND_MAX * 250);
     }
             
 }
